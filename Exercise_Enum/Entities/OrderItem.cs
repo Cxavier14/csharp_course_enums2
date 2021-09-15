@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
+using System.Globalization;
 
 namespace Exercise_Enum.Entities
 {
@@ -16,10 +16,11 @@ namespace Exercise_Enum.Entities
         {
         }
 
-        public OrderItem(int quantity, double price)
+        public OrderItem(int quantity, double price, Product product)
         {
             Quantity = quantity;
             Price = price;
+            Product = product;
         }
 
         public double SubTotal()
@@ -27,5 +28,15 @@ namespace Exercise_Enum.Entities
             return Quantity * Price;
         }
 
+        public override string ToString()
+        {
+            return Product.Name
+                + ", $"
+                + Price.ToString("F2", CultureInfo.InvariantCulture)
+                + ", Quantity: "
+                + Quantity
+                + ", Subtotal: $"
+                + SubTotal().ToString("F2", CultureInfo.InvariantCulture);
+        }
     }
 }
